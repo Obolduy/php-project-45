@@ -5,11 +5,16 @@
     "license": "mit",
     "autoload": {
         "psr-4": {
-            "Hexlet\\Code\\": "src/"
-        }
+            "BrainGames\\": "src/"
+        },
+        "files": [
+            "src/Cli.php"
+        ]
     },
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+      "ext-readline": "*"
+    },
     "bin": [
         "bin/brain-games"
     ]
