@@ -2,11 +2,18 @@
 
 namespace BrainGames\Cli;
 
-function greetings()
+function greetings(): string
 {
-    echo "Welcome to the Brain Games!\n";
+    echo "Welcome to the Brain Games!" . PHP_EOL;
 
-    $name = readline("May I have your name? ");
+    $name = handleUserName();
 
-    echo "Hello, $name!\n";
+    echo "Hello, $name!" . PHP_EOL;
+
+    return $name;
+}
+
+function handleUserName(): string
+{
+    return readline("May I have your name? ");
 }

@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../bootstrap/autoload.php';
+require_once __DIR__ . '/../src/BrainEven/run.php';
+require_once __DIR__ . '/../src/BrainEven/logic.php';
+
+use BrainGames\Cli;
+use BrainGames\BrainEven;
+
+$config = require_once __DIR__ . '/../src/config/common.php';
+
+$userName = Cli\greetings();
+
+BrainEven\execute($config, $userName);
