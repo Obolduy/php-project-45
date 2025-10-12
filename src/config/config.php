@@ -25,7 +25,7 @@ return [
         'ask_for_user_name' => 'May I have your name? ',
         'user_greetings'    => "Hello, %s!",
         'has_won'           => "Congratulations, %s!",
-        'has_lost'          => "Let's try again, %s",
+        'has_lost'          => "Let's try again, %s!",
     ],
     'games_info' => [
         'brain-even'        => "Answer \"%s\" if the number is even, otherwise answer \"%s\".",
