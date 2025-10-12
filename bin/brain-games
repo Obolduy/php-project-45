@@ -3,4 +3,6 @@
 
 require_once __DIR__ . '/../bootstrap/autoload.php';
 
-BrainGames\Cli\greetings();
+use BrainGames\Cli;
+
+Cli\greetings();
