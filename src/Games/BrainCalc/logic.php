@@ -13,5 +13,5 @@ function generateCalculationValue(): array
         3 => ['expression_text' => "$firstNumber * $secondNumber", 'expression_answer' => $firstNumber * $secondNumber],
     };
 
-    return [$expression['expression_text'], (string) round($expression['expression_answer'])];
+    return [$expression['expression_text'], (string) $expression['expression_answer']];
 }
