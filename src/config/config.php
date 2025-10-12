@@ -32,6 +32,6 @@ return [
         'brain-calc'        => 'What is the result of the expression?',
         'brain-gcd'         => 'Find the greatest common divisor of given numbers.',
         'brain-progression' => 'What number is missing in the progression?',
-        'brain-prime'       => "Answer \"%s\" if the number is prime. Otherwise answer \"%s\".",
+        'brain-prime'       => "Answer \"%s\" if given number is prime. Otherwise answer \"%s\".",
     ],
 ];
