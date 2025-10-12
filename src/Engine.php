@@ -12,12 +12,14 @@ function start(array $config, string $gameName, string $userName, string $greeti
 {
     echo $greetingsMessage . PHP_EOL;
 
-    run($config, $gameName, $userName);
+    $hasWon = run($config, $gameName);
 
-    echo "Congratulations, $userName!" . PHP_EOL;
+    $template = $hasWon ? $config['system_messages']['has_won'] : $config['system_messages']['has_lost'];
+
+    echo sprintf($template, $userName) . PHP_EOL;
 }
 
-function run(array $config, string $gameName, string $userName): void
+function run(array $config, string $gameName): bool
 {
     $correctAnswersCountGoal = 3;
     $currentCorrectAnswersCount = 0;
@@ -29,25 +31,21 @@ function run(array $config, string $gameName, string $userName): void
 
         echo $answer['output_text'] . PHP_EOL;
 
-        $additionalQuestionAnswerText = getAdditionalQuestionAnswerText(
-            $config,
-            $answer['is_correct'],
-            $userName
-        );
-
-        if ($additionalQuestionAnswerText) {
-            echo $additionalQuestionAnswerText . PHP_EOL;
+        if (!$answer['is_correct']) {
+            break;
         }
     }
+
+    return $correctAnswersCountGoal === $currentCorrectAnswersCount;
 }
 
 function handleQuestion(array $config, string $gameName): array
 {
     [$question, $correctAnswer] = getQuestion($config, $gameName);
 
-    echo "Question: $question" . PHP_EOL;
+    echo sprintf($config['messages']['question'], $question) . PHP_EOL;
 
-    $answer = readline("Your answer: ");
+    $answer = readline($config['messages']['answer']);
 
     return $answer === $correctAnswer
         ? ['is_correct' => true, 'output_text' => $config['messages']['correct']]
@@ -63,13 +61,4 @@ function getQuestion(array $config, string $gameName): array
         $config['games']['brain_prime']       => BrainPrime\generatePrimeValue($config),
         default                               => BrainEven\generateEvenOrOddValue($config),
     };
-}
-
-function getAdditionalQuestionAnswerText(array $config, bool $isCorrect, string $userName): ?string
-{
-    $correction = $isCorrect ? 'correct' : 'incorrect';
-
-    $text = $config['additional_question_answer_text'][$correction] ?? null;
-
-    return $text ? sprintf($text, $userName) : null;
 }
