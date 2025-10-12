@@ -17,5 +17,8 @@
     },
     "bin": [
         "bin/brain-games"
-    ]
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "4.x-dev"
+    }
 }
