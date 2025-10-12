@@ -15,5 +15,5 @@ function greetings(array $config): string
 
 function handleUserName(array $config): string
 {
-    return readline($config['system_messages']['ask_for_user_name']);
+    return (string) readline($config['system_messages']['ask_for_user_name']);
 }
