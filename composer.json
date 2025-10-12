@@ -14,8 +14,7 @@
     },
     "minimum-stability": "dev",
     "require": {
-      "ext-readline": "*",
-      "ext-gmp": "*"
+      "ext-readline": "*"
     },
     "bin": [
         "bin/brain-games",
