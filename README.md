@@ -7,12 +7,11 @@
 
 ### Asciinemas
 #### Brain Even  
-https://asciinema.org/a/pOJP0Hdr9m4FpLBmMHIx9GgZ8
+
 #### Brain Calc
-https://asciinema.org/a/c7TWbSsdXgOZe8UGnJRVu0AKT
+
 #### Brain Gcd
-https://asciinema.org/a/B9bW19rNmPO41DI4IoKvRC2e1
+
 #### Brain Progression
-https://asciinema.org/a/MolJLektOW89CbNRLXhZ1usSu
+
 #### Brain Prime
-https://asciinema.org/a/11GBQ273fdgdXjmkn8wGRpdUs
