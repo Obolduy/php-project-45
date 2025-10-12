@@ -6,7 +6,7 @@ require_once __DIR__ . '/../bootstrap/autoload.php';
 use BrainGames\Cli;
 use BrainGames\Engine;
 
-$config = require_once __DIR__ . '/../src/config/common.php';
+$config = require_once __DIR__ . '/../src/config/config.php';
 
 $gameName = $config['games']['brain_gcd'];
 
