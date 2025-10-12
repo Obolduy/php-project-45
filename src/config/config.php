@@ -17,7 +17,7 @@ return [
         'welcome'   => 'Welcome to the Brain Games!',
         'correct'   => 'Correct!',
         'incorrect' => "\"%s\" is wrong answer ;(. Correct answer was \"%s\"",
-        'question'  => "Question: \"%s\"",
+        'question'  => "Question: %s",
         'answer'    => "Your answer: ",
     ],
     'system_messages' => [
