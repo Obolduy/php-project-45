@@ -14,12 +14,14 @@
     },
     "minimum-stability": "dev",
     "require": {
-      "ext-readline": "*"
+      "ext-readline": "*",
+      "ext-gmp": "*"
     },
     "bin": [
         "bin/brain-games",
         "bin/brain-even",
-        "bin/brain-calc"
+        "bin/brain-calc",
+        "bin/brain-gcd"
     ],
     "require-dev": {
         "squizlabs/php_codesniffer": "4.x-dev"

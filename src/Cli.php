@@ -8,7 +8,7 @@ function greetings(array $config): string
 
     $name = handleUserName($config);
 
-    echo $config['system_messages']['user_greetings'] . PHP_EOL;
+    echo sprintf($config['system_messages']['user_greetings'], $name) . PHP_EOL;
 
     return $name;
 }
