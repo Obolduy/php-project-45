@@ -6,11 +6,13 @@ use BrainGames\Games\BrainEven;
 use BrainGames\Games\BrainCalc;
 use BrainGames\Games\BrainGcd;
 use BrainGames\Games\BrainProgression;
+use BrainGames\Games\BrainPrime;
 
 require_once __DIR__ . '/../src/Games/BrainEven/logic.php';
 require_once __DIR__ . '/../src/Games/BrainCalc/logic.php';
 require_once __DIR__ . '/../src/Games/BrainGcd/logic.php';
 require_once __DIR__ . '/../src/Games/BrainProgression/logic.php';
+require_once __DIR__ . '/../src/Games/BrainPrime/logic.php';
 
 function start(array $config, string $gameName, string $userName, string $greetingsMessage): void
 {
@@ -36,7 +38,6 @@ function run(array $config, string $gameName, string $userName): void
         $additionalQuestionAnswerText = getAdditionalQuestionAnswerText(
             $config,
             $answer['is_correct'],
-            $gameName,
             $userName
         );
 
@@ -65,15 +66,16 @@ function getQuestion(array $config, string $gameName): array
         $config['games']['brain_calc']        => BrainCalc\generateCalculationValue(),
         $config['games']['brain_gcd']         => BrainGcd\generateGcdValue(),
         $config['games']['brain_progression'] => BrainProgression\generateProgressionValue(),
+        $config['games']['brain_prime']       => BrainPrime\generatePrimeValue($config),
         default                               => BrainEven\generateEvenOrOddValue($config),
     };
 }
 
-function getAdditionalQuestionAnswerText(array $config, bool $isCorrect, string $gameName, string $userName): ?string
+function getAdditionalQuestionAnswerText(array $config, bool $isCorrect, string $userName): ?string
 {
     $correction = $isCorrect ? 'correct' : 'incorrect';
 
-    $text = $config['additional_question_answer_text'][$correction][$gameName] ?? null;
+    $text = $config['additional_question_answer_text'][$correction] ?? null;
 
     return $text ? sprintf($text, $userName) : null;
 }

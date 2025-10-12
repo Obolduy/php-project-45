@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../bootstrap/autoload.php';
+
+use BrainGames\Cli;
+use BrainGames\Engine;
+
+$config = require_once __DIR__ . '/../src/config/common.php';
+
+$gameName = $config['games']['brain_prime'];
+
+$userName = Cli\greetings($config);
+
+$greetingsMessage = sprintf(
+    $config['games_info'][$gameName],
+    $config['answers']['yes'],
+    $config['answers']['no'],
+);
+
+Engine\start($config, $gameName, $userName, $greetingsMessage);

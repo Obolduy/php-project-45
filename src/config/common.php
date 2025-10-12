@@ -6,6 +6,7 @@ return [
         'brain_calc'        => 'brain-calc',
         'brain_gcd'         => 'brain-gcd',
         'brain_progression' => 'brain-progression',
+        'brain_prime'       => 'brain-prime',
         'default'           => 'brain-even',
     ],
     'answers' => [
@@ -27,11 +28,9 @@ return [
         'brain-calc'        => 'What is the result of the expression?',
         'brain-gcd'         => 'Find the greatest common divisor of given numbers.',
         'brain-progression' => 'What number is missing in the progression?',
+        'brain-prime'       => "Answer \"%s\" if the number is prime. Otherwise answer \"%s\".",
     ],
     'additional_question_answer_text' => [
-        'incorrect' => [
-            'brain-gcd'         => "Let's try again, %s",
-            'brain-progression' => "Let's try again, %s",
-        ]
+        'incorrect' => "Let's try again, %s"
     ]
 ];
