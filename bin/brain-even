@@ -2,14 +2,20 @@
 <?php
 
 require_once __DIR__ . '/../bootstrap/autoload.php';
-require_once __DIR__ . '/../src/BrainEven/run.php';
-require_once __DIR__ . '/../src/BrainEven/logic.php';
 
 use BrainGames\Cli;
-use BrainGames\BrainEven;
+use BrainGames\Engine;
 
 $config = require_once __DIR__ . '/../src/config/common.php';
 
-$userName = Cli\greetings();
+$gameName = $config['games']['brain_even'];
 
-BrainEven\execute($config, $userName);
+$userName = Cli\greetings($config);
+
+$greetingsMessage = sprintf(
+    $config['games_info'][$gameName],
+    $config['answers']['yes'],
+    $config['answers']['no'],
+);
+
+Engine\start($config, $gameName, $userName, $greetingsMessage);

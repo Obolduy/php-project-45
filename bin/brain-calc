@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../bootstrap/autoload.php';
+
+use BrainGames\Cli;
+use BrainGames\Engine;
+
+$config = require_once __DIR__ . '/../src/config/common.php';
+
+$gameName = $config['games']['brain_calc'];
+
+$userName = Cli\greetings($config);
+
+Engine\start($config, $gameName, $userName, $config['games_info'][$gameName]);

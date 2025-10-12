@@ -2,18 +2,18 @@
 
 namespace BrainGames\Cli;
 
-function greetings(): string
+function greetings(array $config): string
 {
-    echo "Welcome to the Brain Games!" . PHP_EOL;
+    echo $config['system_messages']['init_greetings'] . PHP_EOL;
 
-    $name = handleUserName();
+    $name = handleUserName($config);
 
-    echo "Hello, $name!" . PHP_EOL;
+    echo $config['system_messages']['user_greetings'] . PHP_EOL;
 
     return $name;
 }
 
-function handleUserName(): string
+function handleUserName(array $config): string
 {
-    return readline("May I have your name? ");
+    return readline($config['system_messages']['ask_for_user_name']);
 }

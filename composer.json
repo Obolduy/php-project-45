@@ -8,7 +8,8 @@
             "BrainGames\\": "src/"
         },
         "files": [
-            "src/Cli.php"
+            "src/Cli.php",
+            "src/Engine.php"
         ]
     },
     "minimum-stability": "dev",
@@ -17,7 +18,8 @@
     },
     "bin": [
         "bin/brain-games",
-        "bin/brain-even"
+        "bin/brain-even",
+        "bin/brain-calc"
     ],
     "require-dev": {
         "squizlabs/php_codesniffer": "4.x-dev"
