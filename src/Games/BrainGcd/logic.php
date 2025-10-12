@@ -12,15 +12,15 @@ function generateGcdValue(): array
     return ["$firstNumber $secondNumber", (string) $correctAnswer];
 }
 
-function calculateGcd(int $a, int $b): int
+function calculateGcd(int $firstNumber, int $secondNumber): int
 {
-    while ($b !== 0) {
-        $temp = $b;
+    while ($secondNumber !== 0) {
+        $temp = $secondNumber;
 
-        $b = $a % $b;
+        $secondNumber = $firstNumber % $secondNumber;
 
-        $a = $temp;
+        $firstNumber = $temp;
     }
 
-    return $a;
+    return $firstNumber;
 }
