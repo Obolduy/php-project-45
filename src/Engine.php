@@ -5,10 +5,12 @@ namespace BrainGames\Engine;
 use BrainGames\Games\BrainEven;
 use BrainGames\Games\BrainCalc;
 use BrainGames\Games\BrainGcd;
+use BrainGames\Games\BrainProgression;
 
 require_once __DIR__ . '/../src/Games/BrainEven/logic.php';
 require_once __DIR__ . '/../src/Games/BrainCalc/logic.php';
 require_once __DIR__ . '/../src/Games/BrainGcd/logic.php';
+require_once __DIR__ . '/../src/Games/BrainProgression/logic.php';
 
 function start(array $config, string $gameName, string $userName, string $greetingsMessage): void
 {
@@ -60,9 +62,10 @@ function handleQuestion(array $config, string $gameName): array
 function getQuestion(array $config, string $gameName): array
 {
     return match ($gameName) {
-        $config['games']['brain_calc'] => BrainCalc\generateCalculationValue(),
-        $config['games']['brain_gcd']  => BrainGcd\generateGcdValue(),
-        default                        => BrainEven\generateEvenOrOddValue($config),
+        $config['games']['brain_calc']        => BrainCalc\generateCalculationValue(),
+        $config['games']['brain_gcd']         => BrainGcd\generateGcdValue(),
+        $config['games']['brain_progression'] => BrainProgression\generateProgressionValue(),
+        default                               => BrainEven\generateEvenOrOddValue($config),
     };
 }
 
