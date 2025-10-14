@@ -2,16 +2,14 @@
 
 namespace BrainGames\Engine;
 
-use BrainGames\Games\BrainEven;
-use BrainGames\Games\BrainCalc;
-use BrainGames\Games\BrainGcd;
-use BrainGames\Games\BrainProgression;
-use BrainGames\Games\BrainPrime;
+use function BrainGames\Games\BrainEven\generateEvenOrOddValue as generateEvenOrOdd;
+use function BrainGames\Games\BrainCalc\generateCalculationValue as generateCalc;
+use function BrainGames\Games\BrainGcd\generateGcdValue as generateGcd;
+use function BrainGames\Games\BrainProgression\generateProgressionValue as generateProgression;
+use function BrainGames\Games\BrainPrime\generatePrimeValue as generatePrime;
 
-function start(array $config, string $gameName, string $userName, string $greetingsMessage): void
+function start(array $config, string $gameName, string $userName): void
 {
-    echo $greetingsMessage . PHP_EOL;
-
     $hasWon = run($config, $gameName);
 
     $template = $hasWon ? $config['system_messages']['has_won'] : $config['system_messages']['has_lost'];
@@ -21,13 +19,13 @@ function start(array $config, string $gameName, string $userName, string $greeti
 
 function run(array $config, string $gameName): bool
 {
-    $correctAnswersCountGoal = 3;
-    $currentCorrectAnswersCount = 0;
+    $goal = 3;
+    $current = 0;
 
-    while ($currentCorrectAnswersCount < $correctAnswersCountGoal) {
+    while ($current < $goal) {
         $answer = handleQuestion($config, $gameName);
 
-        $currentCorrectAnswersCount = $answer['is_correct'] ? $currentCorrectAnswersCount + 1 : 0;
+        $current = $answer['is_correct'] ? $current + 1 : 0;
 
         echo $answer['output_text'] . PHP_EOL;
 
@@ -36,29 +34,44 @@ function run(array $config, string $gameName): bool
         }
     }
 
-    return $correctAnswersCountGoal === $currentCorrectAnswersCount;
+    return $goal === $current;
 }
 
 function handleQuestion(array $config, string $gameName): array
 {
     [$question, $correctAnswer] = getQuestion($config, $gameName);
 
-    echo sprintf($config['messages']['question'], $question) . PHP_EOL;
+    printQuestion($config['messages']['question'], $question);
 
-    $answer = readline($config['messages']['answer']);
+    $answer = getAnswer($config['messages']['answer']);
 
-    return $answer === $correctAnswer
-        ? ['is_correct' => true, 'output_text' => $config['messages']['correct']]
-        : ['is_correct' => false, 'output_text' => sprintf($config['messages']['incorrect'], $answer, $correctAnswer)];
+    return handleAnswer($answer, $correctAnswer, $config);
 }
 
 function getQuestion(array $config, string $gameName): array
 {
     return match ($gameName) {
-        $config['games']['brain_calc']        => BrainCalc\generateCalculationValue(),
-        $config['games']['brain_gcd']         => BrainGcd\generateGcdValue(),
-        $config['games']['brain_progression'] => BrainProgression\generateProgressionValue(),
-        $config['games']['brain_prime']       => BrainPrime\generatePrimeValue($config),
-        default                               => BrainEven\generateEvenOrOddValue($config),
+        $config['games']['brain_calc']        => generateCalc(),
+        $config['games']['brain_gcd']         => generateGcd(),
+        $config['games']['brain_progression'] => generateProgression(),
+        $config['games']['brain_prime']       => generatePrime($config),
+        default                               => generateEvenOrOdd($config),
     };
+}
+
+function printQuestion(string $prefix, string $questionText): void
+{
+    echo sprintf($prefix, $questionText) . PHP_EOL;
+}
+
+function getAnswer(string $answerPrefix): string
+{
+    return (string) readline($answerPrefix);
+}
+
+function handleAnswer(string $answer, string $correctAnswer, array $config): array
+{
+    return $answer === $correctAnswer
+        ? ['is_correct' => true, 'output_text' => $config['messages']['correct']]
+        : ['is_correct' => false, 'output_text' => sprintf($config['messages']['incorrect'], $answer, $correctAnswer)];
 }

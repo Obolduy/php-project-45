@@ -2,18 +2,47 @@
 
 namespace BrainGames\Cli;
 
-function greetings(array $config): string
+use function BrainGames\Engine\start;
+
+function handle(array $config, ?string $gameName = null): void
 {
     echo $config['system_messages']['init_greetings'] . PHP_EOL;
 
-    $name = handleUserName($config);
+    $userName = handleUserName($config['system_messages']['ask_for_user_name']);
 
-    echo sprintf($config['system_messages']['user_greetings'], $name) . PHP_EOL;
+    printUserGreetings($config['system_messages']['user_greetings'], $userName);
 
-    return $name;
+    if ($gameName) {
+        printGameInfo($config, $gameName);
+
+        start($config, $gameName, $userName);
+    }
 }
 
-function handleUserName(array $config): string
+function handleUserName(string $text): string
 {
-    return (string) readline($config['system_messages']['ask_for_user_name']);
+    return (string) readline($text);
+}
+
+function printUserGreetings(string $text, string $name): void
+{
+    echo sprintf($text, $name) . PHP_EOL;
+}
+
+function printGameInfo(array $config, string $gameName): void
+{
+    echo sprintf(...getGameInfo($config, $gameName)) . PHP_EOL;
+}
+
+function getGameInfo(array $config, string $gameName): array
+{
+    $additionalText = match ($gameName) {
+        $config['games']['brain_prime'], $config['games']['brain_even'] => [
+            $config['answers']['yes'],
+            $config['answers']['no']
+        ],
+        default => [],
+    };
+
+    return [$config['games_info'][$gameName], ...$additionalText];
 }

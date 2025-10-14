@@ -4,12 +4,14 @@
     "type": "project",
     "license": "mit",
     "autoload": {
-        "psr-4": {
-            "BrainGames\\": "src/"
-        },
         "files": [
             "src/Cli.php",
-            "src/Engine.php"
+            "src/Engine.php",
+            "src/Games/BrainEven/logic.php",
+            "src/Games/BrainCalc/logic.php",
+            "src/Games/BrainGcd/logic.php",
+            "src/Games/BrainProgression/logic.php",
+            "src/Games/BrainPrime/logic.php"
         ]
     },
     "minimum-stability": "dev",
