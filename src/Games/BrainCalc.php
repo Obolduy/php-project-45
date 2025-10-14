@@ -2,7 +2,12 @@
 
 namespace BrainGames\Games\BrainCalc;
 
-function generateCalculationValue(): array
+function getGameDescription(): string
+{
+    return 'What is the result of the expression?';
+}
+
+function generateRound(): array
 {
     $firstNumber = rand(1, 10);
     $secondNumber = rand(1, 10);

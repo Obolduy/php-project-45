@@ -2,12 +2,17 @@
 
 namespace BrainGames\Games\BrainPrime;
 
-function generatePrimeValue(array $config): array
+function getGameDescription(): string
+{
+    return 'Answer "yes" if given number is prime. Otherwise answer "no".';
+}
+
+function generateRound(): array
 {
     $number = rand(1, 100);
-    $correctAnswer = isPrime($number) ? $config['answers']['yes'] : $config['answers']['no'];
+    $correctAnswer = isPrime($number) ? 'yes' : 'no';
 
-    return [$number, $correctAnswer];
+    return [(string) $number, $correctAnswer];
 }
 
 function isPrime(int $number): bool

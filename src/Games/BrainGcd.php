@@ -2,7 +2,12 @@
 
 namespace BrainGames\Games\BrainGcd;
 
-function generateGcdValue(): array
+function getGameDescription(): string
+{
+    return 'Find the greatest common divisor of given numbers.';
+}
+
+function generateRound(): array
 {
     $firstNumber = rand(1, 100);
     $secondNumber = rand(1, 100);

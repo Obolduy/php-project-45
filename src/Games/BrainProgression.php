@@ -2,7 +2,12 @@
 
 namespace BrainGames\Games\BrainProgression;
 
-function generateProgressionValue(): array
+function getGameDescription(): string
+{
+    return 'What number is missing in the progression?';
+}
+
+function generateRound(): array
 {
     $progression = getProgression();
 

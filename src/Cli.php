@@ -4,7 +4,7 @@ namespace BrainGames\Cli;
 
 use function BrainGames\Engine\start;
 
-function handle(array $config, ?string $gameName = null): void
+function handle(array $config, ?callable $generateRound = null, ?string $gameDescription = null): void
 {
     echo $config['system_messages']['init_greetings'] . PHP_EOL;
 
@@ -12,10 +12,10 @@ function handle(array $config, ?string $gameName = null): void
 
     printUserGreetings($config['system_messages']['user_greetings'], $userName);
 
-    if ($gameName !== null) {
-        printGameInfo($config, $gameName);
+    if ($generateRound !== null && $gameDescription !== null) {
+        printGameDescription($gameDescription);
 
-        start($config, $gameName, $userName);
+        start($config, $generateRound, $userName);
     }
 }
 
@@ -29,20 +29,7 @@ function printUserGreetings(string $text, string $name): void
     echo sprintf($text, $name) . PHP_EOL;
 }
 
-function printGameInfo(array $config, string $gameName): void
+function printGameDescription(string $description): void
 {
-    echo sprintf(...getGameInfo($config, $gameName)) . PHP_EOL;
-}
-
-function getGameInfo(array $config, string $gameName): array
-{
-    $additionalText = match ($gameName) {
-        $config['games']['brain_prime'], $config['games']['brain_even'] => [
-            $config['answers']['yes'],
-            $config['answers']['no']
-        ],
-        default => [],
-    };
-
-    return [$config['games_info'][$gameName], ...$additionalText];
+    echo $description . PHP_EOL;
 }

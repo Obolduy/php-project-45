@@ -2,6 +2,8 @@
 <?php
 
 use function BrainGames\Cli\handle;
+use function BrainGames\Games\BrainEven\generateRound;
+use function BrainGames\Games\BrainEven\getGameDescription;
 
 $autoloadPathComposerGlobal = __DIR__ . '/../../../autoload.php';
 $autoloadPathLocal = __DIR__ . '/../vendor/autoload.php';
@@ -10,4 +12,4 @@ require_once file_exists($autoloadPathComposerGlobal) ? $autoloadPathComposerGlo
 
 $config = require_once __DIR__ . '/../src/config/config.php';
 
-handle($config, $config['games']['brain_even']);
+handle($config, generateRound(...), getGameDescription());
