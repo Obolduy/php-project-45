@@ -12,7 +12,7 @@ function handle(array $config, ?string $gameName = null): void
 
     printUserGreetings($config['system_messages']['user_greetings'], $userName);
 
-    if ($gameName) {
+    if ($gameName !== null) {
         printGameInfo($config, $gameName);
 
         start($config, $gameName, $userName);
