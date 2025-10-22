@@ -1,13 +1,11 @@
 #!/usr/bin/env php
 <?php
 
-use function BrainGames\Cli\handle;
+use function BrainGames\Cli\greet;
 
 $autoloadPathComposerGlobal = __DIR__ . '/../../../autoload.php';
 $autoloadPathLocal = __DIR__ . '/../vendor/autoload.php';
 
 require_once file_exists($autoloadPathComposerGlobal) ? $autoloadPathComposerGlobal : $autoloadPathLocal;
 
-$config = require_once __DIR__ . '/../src/config/config.php';
-
-handle($config);
+greet();

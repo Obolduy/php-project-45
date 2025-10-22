@@ -5,6 +5,7 @@
     "license": "mit",
     "autoload": {
         "files": [
+            "src/CalculationOperationEnum.php",
             "src/Cli.php",
             "src/Engine.php",
             "src/Games/BrainEven.php",

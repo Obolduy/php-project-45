@@ -2,6 +2,13 @@
 
 namespace BrainGames\Games\BrainPrime;
 
+use function BrainGames\Engine\run;
+
+function startGame(): void
+{
+    run(getGameDescription(), generateRound(...));
+}
+
 function getGameDescription(): string
 {
     return 'Answer "yes" if given number is prime. Otherwise answer "no".';

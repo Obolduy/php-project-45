@@ -2,6 +2,13 @@
 
 namespace BrainGames\Games\BrainGcd;
 
+use function BrainGames\Engine\run;
+
+function startGame(): void
+{
+    run(getGameDescription(), generateRound(...));
+}
+
 function getGameDescription(): string
 {
     return 'Find the greatest common divisor of given numbers.';

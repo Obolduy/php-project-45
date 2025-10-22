@@ -4,16 +4,29 @@ namespace BrainGames\Engine;
 
 const ROUNDS_TO_WIN = 3;
 
-function start(array $config, callable $generateRound, string $userName): void
+function run(string $gameDescription, callable $generateRound): void
 {
-    $hasWon = run($config, $generateRound);
+    $config = require __DIR__ . '/config/config.php';
 
-    $template = $hasWon ? $config['system_messages']['has_won'] : $config['system_messages']['has_lost'];
+    $userName = greetUser($config);
 
-    echo sprintf($template, $userName) . PHP_EOL;
+    echo $gameDescription . PHP_EOL;
+
+    $hasWon = playGame($config, $generateRound);
+
+    showResult($config, $userName, $hasWon);
 }
 
-function run(array $config, callable $generateRound): bool
+function greetUser(array $config): string
+{
+    echo $config['system_messages']['init_greetings'] . PHP_EOL;
+    $userName = (string) readline($config['system_messages']['ask_for_user_name']);
+    echo sprintf($config['system_messages']['user_greetings'], $userName) . PHP_EOL;
+
+    return $userName;
+}
+
+function playGame(array $config, callable $generateRound): bool
 {
     for ($current = 0; $current < ROUNDS_TO_WIN; $current++) {
         $answer = handleQuestion($config, $generateRound);
@@ -26,6 +39,12 @@ function run(array $config, callable $generateRound): bool
     }
 
     return true;
+}
+
+function showResult(array $config, string $userName, bool $hasWon): void
+{
+    $template = $hasWon ? $config['system_messages']['has_won'] : $config['system_messages']['has_lost'];
+    echo sprintf($template, $userName) . PHP_EOL;
 }
 
 function handleQuestion(array $config, callable $generateRound): array

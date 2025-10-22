@@ -2,6 +2,13 @@
 
 namespace BrainGames\Games\BrainProgression;
 
+use function BrainGames\Engine\run;
+
+function startGame(): void
+{
+    run(getGameDescription(), generateRound(...));
+}
+
 function getGameDescription(): string
 {
     return 'What number is missing in the progression?';
