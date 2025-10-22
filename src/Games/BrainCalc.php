@@ -26,7 +26,7 @@ function generateRound(): array
 
 function getCalculatedExpression(int $firstNumber, int $secondNumber): array
 {
-    $operation = CalculationOperationEnum::tryFrom(rand(1, 3));
+    $operation = CalculationOperationEnum::from(rand(1, 3));
 
     return [
         'expression_text'   => getCalculationText($firstNumber, $secondNumber, $operation),
